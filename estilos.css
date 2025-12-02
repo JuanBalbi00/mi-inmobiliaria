@@ -1,0 +1,16 @@
+body {
+  font-family: Arial;
+  margin: 20px;
+}
+#mapa-container {
+  position: relative;
+  display: inline-block;
+}
+#lienzo-lotes {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.lote {
+  cursor: pointer;
+}
