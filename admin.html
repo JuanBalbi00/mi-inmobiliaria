@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Administración</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<header>
+<h1>Panel de Administración</h1>
+</header>
+
+
+<section class="admin-box">
+<h2>Agregar Barrio</h2>
+<input id="barrio-nombre" type="text" placeholder="Nombre del barrio" />
+<input id="barrio-imagen" type="text" placeholder="URL de la imagen del mapa" />
+<button onclick="agregarBarrio()">Agregar</button>
+</section>
+
+
+<section class="admin-box">
+<h2>Barrios existentes</h2>
+<div id="admin-barrios"></div>
+</section>
+
+
+<script src="script.js"></script>
+</body>
+</html>

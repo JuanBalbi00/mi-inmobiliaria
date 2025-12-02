@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Barrio</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1 id="barrio-nombre">Cargando...</h1>
+</header>
+
+<section id="barrio-detalle" class="barrio-detalle">
+    <img id="barrio-imagen" src="" alt="Mapa del barrio" style="width:100%;max-width:600px;border-radius:12px;">
+</section>
+
+<section>
+    <h2>Lotes del barrio</h2>
+    <div id="lista-lotes"></div>
+</section>
+
+<script>
+// Obtener ID del barrio desde la URL
+const params = new URLSearchParams(window.location.search);
+const idBarrio = parseInt(params.get("id"));
+
+// Cargar datos desde data.json
+async function cargarBarrio() {
+    const res = await fetch("data.json");
+    const data = await res.json();
+
+    const barrio = data.barrios.find(b => b.id === idBarrio);
+
+    if (!barrio) {
+        document.body.innerHTML = "<h2>Barrio no encontrado</h2>";
+        return;
+    }
+
+    // Mostrar nombre
+    document.getElementById("barrio-nombre").textContent = barrio.nombre;
+
+    // Mostrar imagen
+    document.getElementById("barrio-imagen").src = barrio.imagen;
+
+    // Mostrar lotes
+    const lista = document.getElementById("lista-lotes");
+    lista.innerHTML = "";
+
+    if (barrio.lotes.length === 0) {
+        lista.innerHTML = "<p>No hay lotes cargados.</p>";
+    } else {
+        barrio.lotes.forEach(lote => {
+            const div = document.createElement("div");
+            div.className = "lote-item";
+            div.innerHTML = `
+                <p><strong>Lote ${lote.numero}</strong></p>
+                <p>Superficie: ${lote.superficie} m²</p>
+            `;
+            lista.appendChild(div);
+        });
+    }
+}
+
+cargarBarrio();
+</script>
+
+</body>
+</html>
+
